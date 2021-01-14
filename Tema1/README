@@ -1,0 +1,49 @@
+NUME: CHIRILA ALBERT
+GRUPA: 324CB
+
+
+	Pentru fiecare problema, citirea am facut-o folosind BufferedReader, iar scrierea folosind BufferedWriter.
+
+	PROBLEMA 1
+	   Pentru tipul 1 de instructiuni, fiecare bancnota este urmata de alte doua bancnote. Am observat ca daca trebuie aranjate n
+	   bancnote, pentru fiecare dintre cele 5, exista 2 ^ n - 1 posibilitati: n = 2 => 2 posibilitati fiecare, n = 3 => 4 posibilitati fiecare,
+	   n = 4 => 8 posibilitati fiecare. Astfel, rezultatul final va fi NumarBancnote * (2 * n -1). Ridicarea la putere am facut-o folosind functia
+	   de exponentiere logaritmica din laboratorul Divide et Impera.
+	   
+	   Pentru tipul 2 de instructiuni, am folosit o matrice de dimensiune n * 5, numarul de coloane reprezentand numarul bancnotelor. Prima linie
+	   contine cazul de baza, n = 1(fiecare bancnota poate fi aleasa o singura data). Coloanele reprezinta bancnotele astfel: col0 -> 10 lei, col1 -> 50 lei,
+	   col2 -> 100 lei, col3 -> 200 lei, col4 -> 500 lei. Pentru n > 1, am completat fiecare element al matricei tinand cont de valorile de la pasul anterior.
+	   Pe prima coloana, stiu ca dupa o bancnota de 10 lei, urmeaza una de 50 sau una de 100 si voi aduna, de la pasul anterior, valorile de pe coloanele corespunzatoare
+	   bancnotelor de 50 si 100 de lei. Si asa mai departe fiecare bancnota. Pentru cazul de 200 de lei, se vor aduna 3 valori.
+
+			COMPLEXITATEA PROBLEMEI: Tipul 1: O(log(n - 1)) - de fapt este complexitatea functiei de exponentiere logaritmica.
+						 Tipul 2: O(n) - matricea se parcurge linie cu linie, iar pentru fiecare linie, se parcurge fiecare coloana,
+								ceea ce inseamna O(5). Fiind constanta, complexitatea este O(n).
+
+
+	PROBLEMA 2
+	  Clasa Pair contine cele doua campuri, 'start' si 'end'. Aceasta implementeaza interfata Comparable. Fiecare pereche este adaugata, la citire, intr-un vector
+	  de perechi. Am sortat vectorul astfel: crescator dupa valoarea campului 'start'. In caz de egalitate a doua campuri 'start', se sorteaza descrescator
+	  dupa campul 'end'. Prima pereche din vector nu se ia in considerare, deoarece avand start-ul cel mai mic, este evident ca nu poate fi bucata redundanta. 
+	  Am notat cu p2 aceasta pereche. Am inceput parcurgerea vectorului si verific daca perechile urmatoare sunt redundante fata de perechea p2. Aceasta pereche(p2)
+	  o actualizez doar daca gasesc o pereche cu end-ul mai mare.
+
+		        COMPLEXITATEA PROBLEMEI: Sortare: O(n * log(n))
+						 Parcurgere vector: O(n)
+				=> O(n * log(n))
+
+	PROBLEMA 3
+	  Clasa Interval contine cele doua campuri, x si y, reprezentand capetele fiecarui interval. La citirea din fisier, aceste intervale le introduc intr-un vector.
+	  Pentru calcularea posibilitatilor am folosit o matrice de dimensiune n * (m + 1). Am parcurs prima linie, iar fiecarui element i-am atribuit valorea 1 sau 0, dupa
+	  caz. Daca indicele coloanei apartine intervalului corespunzator linie, se introduce valoarea 1, reprezentand numarul de posibilitati de a rezulta suma specifica coloanei.
+	  De exemplu, pentru intervalul [1, 3], si m = 6, prima linie va arata astfel: 0 1 1 1 0 0 0. Apoi parcurg celelalte linii. Pentru fiecare linie, parcurg fiecare coloana si 
+	  daca indicele se afla in intervalul corespunzator, elementele de pe linie se modifica astfel: cat timp nu se depaseste numarul maxim de bomboane(coloana m), se aduna elementele
+	  de pe linia anterioara. Rezultatul se gaseste pe ultima linie, in dreptul coloanei m.
+		
+		 	COMPLEXITATEA PROBLEMEI: Initializarea primei linii: O(m) - constant
+						 Parcurgerea fiecarei linii: O(n)
+						 Parcurgerea fiecarei coloane: O(m) - constant
+						 Parcurgerea liniei anterioare pentru fiecare coloana a carei indice este in intervalul corespunzator: O(m) - constant
+				=> O(n)
+	
+
